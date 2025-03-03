@@ -1,5 +1,4 @@
 # LoRa-Based-Water-Pump-Automation
-Welcome to my small project in which i automate one of my most repeated tasks of the day, that being turning the pump switch on and off multiple times a day to keep my home's water tank full of water.
-I used esp32s, lora modules, a relay switch to automate it.
-Also the entire system is remotely controllable as well if manual override is ever reauired remotely.
-I will add the required code, circuit schematics and working demo in a day or two. I am currently in the testing phase. A few are remaining, then i will upload everything.
+Welcome to my small project, where I automate one of my most frequently repeated daily tasks—turning the pump switch on and off multiple times a day to keep my home's water tank full.  
+I used an ESP32, LoRa modules, and a relay switch to automate the process. The entire system is also remotely controllable, allowing for manual override if needed.  
+I will upload the required code, circuit schematics, and a working demo in about a week. I am currently in the testing phase, with a few final checks remaining before I release everything.  
