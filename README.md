@@ -22,7 +22,7 @@ You can automate or control a wide range of electrical appliances — **as long 
 
 <img width="2000" alt="Schematic" src="https://github.com/user-attachments/assets/be5b64c1-4705-4fa5-8390-d5da07377d7c" />  
 
-![IMG_20250409_161252(1)(1)](https://github.com/user-attachments/assets/cdc66752-a359-4d24-b17a-8894f50f7ef4)
+![IMG_20250409_161252(1)(1)](https://github.com/user-attachments/assets/cdc66752-a359-4d24-b17a-8894f50f7ef4)  
 
 
 ---
@@ -48,7 +48,7 @@ A **manual override switch** is also installed — it can cut power to the motor
 
 This project is for **educational purposes only**.  
 Always use **components rated for your specific voltage and current requirements**, and ensure safe wiring practices.  
-**I’m not responsible** if your toaster becomes sentient, your fuse box explodes, or your cat develops Wi-Fi access.
+**I’m not responsible** if your toaster toasts itself, your fuse box explodes, or your cat launches into orbit.
 
 ---
 
