@@ -8,3 +8,6 @@ Welcome to my small project, where I automate my house's water pump.
 1x SRD-05VDC-SL-C Relay Module  
 1x AJ-SR04M Ultrasonic Sensor  
 # Schematic:  
+<img width="2000" alt="Schematic" src="https://github.com/user-attachments/assets/be5b64c1-4705-4fa5-8390-d5da07377d7c" />
+# License  
+This project falls under the MIT license. Read the license file for more info.
