@@ -1,7 +1,7 @@
 # 🏠 Home Automation using ESP32 + LoRa
 
-Welcome to my humble little chaos machine — a DIY water pump automation and control setup using ESP32 and long-range LoRa communication.  
-You can automate or control a wide range of electrical appliances — **as long as you’re using components rated for your specific application** (e.g., proper relays for high voltage).
+Welcome to a DIY water pump automation and control setup using ESP32 and long-range LoRa communication.  
+You can automate or control a wide range of electrical appliances — **as long as you're using components rated for your specific application** (e.g., proper relays for high voltage).
 
 ---
 
@@ -24,10 +24,27 @@ You can automate or control a wide range of electrical appliances — **as long 
 
 ---
 
+## ⚙️ How It Works
+
+### 📤 Transmission Section:
+- The ultrasonic sensor sends distance measurements to the ESP32.
+- The ESP32 transmits this data via the LoRa module to the receiver.
+
+### 📥 Receiver Section:
+- The receiving LoRa module sends data to its connected ESP32.
+- Based on the received data, the ESP32 decides whether to activate or deactivate the load (motor) via a **5V relay**.
+- This ESP32 is also connected to a **home Wi-Fi network**, giving it access to the internet.
+- A **web server** is configured on this ESP32, allowing **remote control** of the motor (e.g., via a smartphone).
+
+### 🧰 Manual Override:
+A **manual override switch** is also installed — it can cut power to the motor regardless of the ESP32’s state. Because sometimes you just need to shut it down the old-school way.
+
+---
+
 ## ⚠️ Disclaimer
 
 This project is for **educational purposes only**.  
-Make sure you're using **voltage- and current-rated components** for whatever you're controlling.  
+Always use **components rated for your specific voltage and current requirements**, and ensure safe wiring practices.  
 **I’m not responsible** if your toaster becomes sentient, your fuse box explodes, or your cat develops Wi-Fi access.
 
 ---
