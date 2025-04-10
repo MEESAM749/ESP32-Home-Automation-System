@@ -2,24 +2,11 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
-
-
 // Pin definitions
 #define SS      5
 #define RST     14
 #define DIO0    26
 #define RELAY_PIN 21 
-
-
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
 
 // WiFi creds
 const char* ssid = "1122";
@@ -31,8 +18,14 @@ WebServer server(80);
 // Globals
 String latestLoRaMessage = "No data yet";
 bool relayState = false;
+bool manualRelayOff = false;  // Flag to track manual relay control
 
-// Webpage:
+// Water tank parameters (height in cm)
+const float tankHeight = 130.0;  // tank height is 130 cm
+const float lowThreshold = 30.0;  // Turn on relay when water level is below 10 cm
+const float highThreshold = 70.0;  // Turn off relay when water level reaches 40 cm
+
+// Webpage template
 const char* htmlTemplate = R"rawliteral(
 <!DOCTYPE HTML>
 <html>
@@ -74,13 +67,6 @@ const char* htmlTemplate = R"rawliteral(
 </html>
 )rawliteral";
 
-
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
-
-
 // Web server task
 void webServerTask(void* param) {
   WiFi.begin(ssid, password);
@@ -109,14 +95,18 @@ void webServerTask(void* param) {
     if (server.hasArg("state")) {
       String state = server.arg("state");
       if (state == "1") {
+        // Manually turn on the relay
         digitalWrite(RELAY_PIN, LOW);  // Active LOW
         relayState = true;
+        manualRelayOff = false;  // Reset the manual flag
+        Serial.println("Relay manually turned ON.");
       } else {
-        digitalWrite(RELAY_PIN, HIGH);
+        // Manually turn off the relay
+        digitalWrite(RELAY_PIN, HIGH); // Relay OFF
         relayState = false;
+        manualRelayOff = true;  // Set the flag to prevent automatic relay control
+        Serial.println("Relay manually turned OFF.");
       }
-      Serial.print("Relay set to: ");
-      Serial.println(relayState ? "ON" : "OFF");
     }
     server.send(200, "text/plain", "OK");
   });
@@ -130,13 +120,6 @@ void webServerTask(void* param) {
   }
 }
 
-
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
-
-
 // LoRa receiver task
 void loraReceiveTask(void* param) {
   while (1) {
@@ -149,17 +132,39 @@ void loraReceiveTask(void* param) {
       latestLoRaMessage = message;
       Serial.print("Received message: ");
       Serial.println(message);
+
+      // If the relay is manually turned off, do not automatically control it
+      if (manualRelayOff) {
+        Serial.println("Manual relay control active. Skipping auto relay control.");
+        continue;
+      }
+
+      // Parse the received message to extract the distance
+      float measuredDistance = message.toFloat();
+
+      // Calculate the water level
+      float waterLevel = tankHeight - measuredDistance;
+
+      // Control the relay based on water level
+      if (waterLevel < lowThreshold) {
+        // Water level is low, turn ON the relay
+        if (!relayState) {
+          digitalWrite(RELAY_PIN, LOW);  // Active LOW
+          relayState = true;
+          Serial.println("Water level low. Relay turned ON.");
+        }
+      } else if (waterLevel >= highThreshold) {
+        // Water level is high enough, turn OFF the relay
+        if (relayState) {
+          digitalWrite(RELAY_PIN, HIGH);
+          relayState = false;
+          Serial.println("Water level sufficient. Relay turned OFF.");
+        }
+      }
     }
     vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
-
-
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-
-
 
 void setup() {
   Serial.begin(115200);
