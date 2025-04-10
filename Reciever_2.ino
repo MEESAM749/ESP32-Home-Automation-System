@@ -30,7 +30,7 @@ const char* htmlTemplate = R"rawliteral(
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>ESP32 LoRa Receiver</title>
+  <title>ESP32 Receiver</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: Arial; text-align: center; padding-top: 30px; }
@@ -52,7 +52,7 @@ const char* htmlTemplate = R"rawliteral(
   </script>
 </head>
 <body>
-  <h1>LoRa Distance Monitor</h1>
+  <h1>Distance Monitor</h1>
   <div class="card">
     <h2>Distance</h2>
     <p id="distance">%DISTANCE%</p>
