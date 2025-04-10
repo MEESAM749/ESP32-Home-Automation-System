@@ -2,19 +2,32 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-// Pin definitions
-#define TRIG_PIN 23  // GPIO23
-#define ECHO_PIN 22  // GPIO22
-#define SS      5    // LoRa NSS
-#define RST     14   // LoRa RESET
-#define DIO0    26   // LoRa IRQ
 
-// Global variable to store distance (simplest way to share data between tasks)
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+
+
+#define TRIG_PIN 23  
+#define ECHO_PIN 22  
+#define SS      5    
+#define RST     14   
+#define DIO0    26   
+
+
+// Global variable to store distance
 float currentDistance = 0.0;
+
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+
 
 // Task for reading from ultrasonic sensor
 void ultrasonicSensorTask(void *parameter) {
-  // This task will run forever
   while (1) {
     // --- START ULTRASONIC MEASUREMENT ---
     // 1. Clear the trigger pin
@@ -42,9 +55,15 @@ void ultrasonicSensorTask(void *parameter) {
   }
 }
 
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+
+
 // Task for sending data via LoRa
 void loraSendTask(void *parameter) {
-  // This task will run forever
   while (1) {
     // 1. Send the current distance reading via LoRa
     LoRa.beginPacket();
@@ -52,17 +71,21 @@ void loraSendTask(void *parameter) {
     LoRa.print(currentDistance);  
     LoRa.println(" cm");
     LoRa.endPacket();
-    
     // 2. Print confirmation to serial
     Serial.println("LoRa packet sent!");
-    
     // 3. Wait a bit before next transmission (1 second)
     vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
 }
 
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+
+
 void setup() {
-  // Initialize serial communication
   Serial.begin(115200);
   Serial.println("Starting...");
   
@@ -78,17 +101,17 @@ void setup() {
   }
   Serial.println("LoRa initialized successfully!");
   
-  // Create the ultrasonic sensor task
+  //Ultrasonic sensor task
   xTaskCreate(
-    ultrasonicSensorTask,  // Function that implements the task
-    "UltrasonicTask",      // Text name for the task
-    2048,                  // Stack size in words
-    NULL,                  // Parameter passed to the task
-    1,                     // Task priority (1 is low)
-    NULL                   // Task handle (not needed here)
+    ultrasonicSensorTask, 
+    "UltrasonicTask",      
+    2048,                  
+    NULL,                  
+    1,                     
+    NULL                   
   );
   
-  // Create the LoRa sending task
+  //LoRa Module sending task
   xTaskCreate(
     loraSendTask,          // Function that implements the task
     "LoRaTask",            // Text name for the task
@@ -97,16 +120,22 @@ void setup() {
     1,                     // Task priority (same as other task)
     NULL                   // Task handle (not needed here)
   );
-  
-  // RTOS scheduler starts automatically after setup()
   Serial.println("Tasks created and scheduler started!");
 }
 
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
+
+
+
 void loop() {
-  // Empty - the tasks are running separately now!
-  // This is intentionally left empty as FreeRTOS handles the tasks
-  
-  // The delay below is not necessary but keeps the loop from 
-  // running constantly and wasting CPU cycles
+  // The delay below is not necessary but keeps the loop from running constantly and wasting CPU cycles
   vTaskDelay(1000 / portTICK_PERIOD_MS);
 }
+
+
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
