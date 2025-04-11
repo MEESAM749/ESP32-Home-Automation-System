@@ -1,4 +1,4 @@
-# 🏠 Home Automation using ESP32 + LoRa
+# 🏠 Home Underground Water Pump Automation using ESP32 + LoRa
 
 Welcome to a DIY water pump automation and control setup using ESP32 and long-range LoRa communication.  
 You can automate or control a wide range of electrical appliances — **as long as you're using components rated for your specific application** (e.g., proper relays for high voltage).
