@@ -19,8 +19,10 @@ You can automate or control a wide range of electrical appliances — **as long 
 ## 🔧 Schematic
 
 > _(Click to enlarge)_
+<img width="436" alt="HOME" src="https://github.com/user-attachments/assets/5f58b72e-adcc-43c3-935f-2e47ac2c1e6b" />  
 
 <img width="2000" alt="Schematic" src="https://github.com/user-attachments/assets/be5b64c1-4705-4fa5-8390-d5da07377d7c" />  
+
 
 ![IMG_20250409_161252(1)(1)](https://github.com/user-attachments/assets/cdc66752-a359-4d24-b17a-8894f50f7ef4)   
 
