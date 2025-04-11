@@ -8,7 +8,7 @@ You can automate or control a wide range of electrical appliances — **as long 
 ## 📦 Components Required
 
 - 2x **ESP32-WROOM-32**
-- 2x **SX1278 (Ra-02) LoRa Modules**
+- 2x **SX1278 (Ra-02) LoRa Modules** (You may not need this if in your house, the distance between the water pump at the ground level and the water tank at the roof isn't too much. You might get away with just the esp's connecting to the home network. But in my case, the distance is too much and the esp at the roof cannot connect to the homw wifi on it's own.)  
 - 2x **433MHz SMA Antennae**
 - 2x **SMA Female Jack to IPX / U.FL RF Pigtail Cables**
 - 1x **SRD-05VDC-SL-C Relay Module**
