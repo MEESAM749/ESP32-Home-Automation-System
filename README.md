@@ -12,7 +12,7 @@ You can automate or control a wide range of electrical appliances — **as long 
 - - 2x **433MHz SMA Antennae**  
 - - 2x **SMA Female Jack to IPX / U.FL RF Pigtail Cables**  
 - #### NOTE:You may not need the LoRa modules if in your house, the distance between the water pump at the ground level and the water tank at the roof isn't too much. You might get away with just the esp's connecting to the home network. But in my case, the distance is too much and the esp at the roof cannot connect to the home wifi on it's own.  
-- 1x **SRD-05VDC-SL-C Relay Module**  
+- 1x **SRD-05VDC-SL-C Relay Module(In my case, this was enough, if you are trying to control something which draws more power, then you might want to use a relay rated for that load.)**  
 - 1x **AJ-SR04M Waterproof Ultrasonic Sensor**  
 
 ---
