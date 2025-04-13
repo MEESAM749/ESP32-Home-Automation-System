@@ -110,15 +110,13 @@ void setup() {
     1,                     
     NULL                   
   );
-  
-  //LoRa Module sending task
   xTaskCreate(
-    loraSendTask,          // Function that implements the task
-    "LoRaTask",            // Text name for the task
-    2048,                  // Stack size in words
-    NULL,                  // Parameter passed to the task
-    1,                     // Task priority (same as other task)
-    NULL                   // Task handle (not needed here)
+    loraSendTask,          
+    "LoRaTask",            
+    2048,                  
+    NULL,                  
+    1,                     
+    NULL                   
   );
   Serial.println("Tasks created and scheduler started!");
 }
